@@ -4,8 +4,12 @@ The instructions are not documented on the [Tile Vertex ISA](https://docs.graphc
 so instruction formats were found by decompiling iai_ipu1.so in the Poplar SDK in Ghidra.
 The instructions themselves are mentioned in the IPUArchInfo module in the SDK, and in its corresponding C++ header.
 
-To build, make sure to set `LLVM_EXPERIMENTAL_TARGETS_TO_BUILD` to `Colossus` in your cmake flags. `LLVM_TARGETS_TO_BUILD` should probably also be that, but I forgot while testing and don't want to wait another few hours for an llvm compilation :( 
+To build, make sure to set `LLVM_TARGETS_TO_BUILD` and `LLVM_EXPERIMENTAL_TARGETS_TO_BUILD` to `Colossus` in your cmake flags.
+It will make the compilation marginally faster by skipping all of the other useless targets like "X86" and "ARM64" (who even compiles for those anyways?)
 
+For nix users, a complimentary shell.nix is provided, and you can invoke `eval "$cmake"` to prepare your build folder. You can then build with make, or more conveniently invoke `cmake --build build --parallel <num_of_cores>`
+
+The shell.nix is [Asher Mancinelli's LLVM shell.nix](https://www.ashermancinelli.com/csblog/2022-2-2-LLVM-Development-On-NixOS.html) with some minor tweaks to make it work. The build is done on gcc13 as there seems to be an issue when building with gcc15.
 # The LLVM Compiler Infrastructure
 
 This directory and its sub-directories contain the source code for LLVM,
