@@ -1,3 +1,11 @@
+# The main research repository is [here!](https://github.com/Saghetti0/graphcore-ipu-research)
+This repo is just a simple fork for adding missing instructions in the IPU1/GC2's instruction set.
+The instructions are not documented on the [Tile Vertex ISA](https://docs.graphcore.ai/projects/isa/en/latest/_static/Tile-Vertex-ISA_1.2.3.pdf),
+so instruction formats were found by decompiling iai_ipu1.so in the Poplar SDK in Ghidra.
+The instructions themselves are mentioned in the IPUArchInfo module in the SDK, and in its corresponding C++ header.
+
+To build, make sure to set `LLVM_EXPERIMENTAL_TARGETS_TO_BUILD` to `Colossus` in your cmake flags. `LLVM_TARGETS_TO_BUILD` should probably also be that, but I forgot while testing and don't want to wait another few hours for an llvm compilation :( 
+
 # The LLVM Compiler Infrastructure
 
 This directory and its sub-directories contain the source code for LLVM,
