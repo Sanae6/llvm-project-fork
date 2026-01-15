@@ -110,7 +110,9 @@ class inst_runall_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   let TSFlags{25} = 0; // Can coissue.
 }
 
-// Undocumented instructions
+// Undocumented instructions, ignore the suffixes for the names.
+// The suffixes currently are not based on the actual suffixes because 
+// it didn't matter enough to copy them from the assembler in IPUArchInfo.
 class inst_delay_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   // Format: delay zimm19
   let AsmString = "delay $op0";
@@ -159,9 +161,9 @@ class inst_sans_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   bits<1> coissue;
   let Inst{31} = 0b0;
   let Inst{30} = 0b1;
-  let Inst{29-27} = 0b000;
-  let Inst{26-25} = 0b11;
-  let Inst{24-19} = 0b000000;
+  let Inst{29-24} = 0b000000;
+  let Inst{23-22} = 0b11;
+  let Inst{21-19} = 0b000;
   let Inst{18-0} = op0;
   let TSFlags{22} = 0; // Lane number.
   let TSFlags{24} = 1; // System instruction.
