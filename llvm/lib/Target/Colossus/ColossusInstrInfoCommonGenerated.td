@@ -14,6 +14,7 @@ def imm12zi : ImmZIOperand<12, ImmAsmOperand<"12zi">>;
 def imm13zi : ImmZIOperand<13, ImmAsmOperand<"13zi">>;
 def imm16si : ImmSIOperand<16, ImmAsmOperand<"16si">>;
 def imm16zi : ImmZIOperand<16, ImmAsmOperand<"16zi">>;
+def imm18zi : ImmZIOperand<18, ImmAsmOperand<"18zi">>;
 def imm19zi : ImmZIOperand<19, ImmAsmOperand<"19zi">>;
 def imm1zi : ImmZIOperand<1, ImmAsmOperand<"1zi">>;
 def imm2zi : ImmZIOperand<2, ImmAsmOperand<"2zi">>;
