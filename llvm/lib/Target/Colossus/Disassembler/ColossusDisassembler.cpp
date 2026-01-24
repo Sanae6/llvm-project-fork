@@ -82,6 +82,9 @@ static DecodeStatus DecodeARQuadRegisterClass(llvm::MCInst &Inst,
 static DecodeStatus DecodeImm8SIOperand(MCInst &Inst, uint64_t Imm,
                                         int64_t Address, const void *Decoder);
 
+static DecodeStatus DecodeImm11SIOperand(MCInst &Inst, uint64_t Imm,
+                                         int64_t Address, const void *Decoder);
+
 static DecodeStatus DecodeImm12IZOperand(MCInst &Inst, uint64_t Imm,
                                          int64_t Address, const void *Decoder);
 
@@ -268,6 +271,11 @@ namespace {
 static DecodeStatus DecodeImm8SIOperand(MCInst &Inst, uint64_t Imm,
                                         int64_t Address, const void *Decoder) {
   return DecodeImmSIOperand<8>(Inst, Imm, Address, Decoder);
+}
+
+static DecodeStatus DecodeImm11SIOperand(MCInst &Inst, uint64_t Imm,
+                                         int64_t Address, const void *Decoder) {
+  return DecodeImmSIOperand<11>(Inst, Imm, Address, Decoder);
 }
 
 static DecodeStatus DecodeImm12IZOperand(MCInst &Inst, uint64_t Imm,

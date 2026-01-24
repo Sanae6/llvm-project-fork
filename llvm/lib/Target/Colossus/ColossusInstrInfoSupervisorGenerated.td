@@ -133,6 +133,47 @@ class inst_delay_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   let TSFlags{24} = 1; // System instruction.
   let TSFlags{25} = 0; // Can coissue.
 }
+class inst_delaypic_mmmn_zi_zi_zi : EncodedSupervisorI, Sched<[WriteMain]> {
+  // Format: delaypic zimm7, zimm1, zimm18
+  let AsmString = "delaypic $op0, $op1, $op2";
+  dag OutOperandList = (outs );
+  dag InOperandList = (ins imm7zi:$op0, imm1zi:$op1, imm18zi:$op2, CoissueFlag:$coissue);
+  let Constraints = "";
+  bits<7> op0;
+  bits<1> op1;
+  bits<18> op2;
+  bits<1> coissue;
+  let Inst{31} = 0b0;
+  let Inst{30-29} = 0b11;
+  let Inst{28-26} = 0b000;
+  let Inst{25-19} = op0;
+  let Inst{18} = op1;
+  let Inst{17-0} = op2;
+  let TSFlags{22} = 0; // Lane number.
+  let TSFlags{24} = 1; // System instruction.
+  let TSFlags{25} = 0; // Can coissue.
+}
+class inst_delayxpic_mmmn_zi_zi_zi : EncodedSupervisorI, Sched<[WriteMain]> {
+  // Format: delayxpic zimm12, zimm1, zimm13
+  let AsmString = "delayxpic $op0, $op1, $op2";
+  dag OutOperandList = (outs );
+  dag InOperandList = (ins imm12zi:$op0, imm1zi:$op1, imm13zi:$op2, CoissueFlag:$coissue);
+  let Constraints = "";
+  bits<12> op0;
+  bits<1> op1;
+  bits<13> op2;
+  bits<1> coissue;
+  let Inst{31} = 0b0;
+  let Inst{30-29} = 0b11;
+  let Inst{28-27} = 0b00;
+  let Inst{26} = 0b1;
+  let Inst{25-14} = op0;
+  let Inst{13} = op1;
+  let Inst{12-0} = op2;
+  let TSFlags{22} = 0; // Lane number.
+  let TSFlags{24} = 1; // System instruction.
+  let TSFlags{25} = 0; // Can coissue.
+}
 class inst_sync_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   // Format: sync zimm4
   let AsmString = "sync $op0";
@@ -169,11 +210,11 @@ class inst_sans_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   let TSFlags{24} = 1; // System instruction.
   let TSFlags{25} = 0; // Can coissue.
 }
-class inst_send_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
+class inst_send_mmmn_zi_bf_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   // Format: send zimm6, zimm18, zimm3
   let AsmString = "send $op0, $op1, $op2";
   dag OutOperandList = (outs );
-  dag InOperandList = (ins imm6zi:$op0, imm18zi:$op1, imm3zi:$op2, CoissueFlag:$coissue);
+  dag InOperandList = (ins imm6zi:$op0, Rel19S2Operand:$op1, imm3zi:$op2, CoissueFlag:$coissue);
   let Constraints = "";
   bits<6> op0;
   bits<18> op1;
@@ -181,6 +222,69 @@ class inst_send_mmmn_zi : EncodedSupervisorI, Sched<[WriteMain]> {
   bits<1> coissue;
   let Inst{31} = 0b0;
   let Inst{30-27} = 0b1111;
+  let Inst{26-21} = op0;
+  let Inst{20-3} = op1;
+  let Inst{2-0} = op2;
+  let TSFlags{22} = 0; // Lane number.
+  let TSFlags{24} = 1; // System instruction.
+  let TSFlags{25} = 0; // Can coissue.
+}
+class inst_sendoff_mmmn_zi_bf_si : EncodedSupervisorI, Sched<[WriteMain]> {
+  // Format: sendoff zimm12, bf11, simm3
+  let AsmString = "sendoff $op0, $op1, $op2";
+  dag OutOperandList = (outs );
+  dag InOperandList = (ins imm12zi:$op0, imm11zi:$op1, imm3si:$op2, CoissueFlag:$coissue);
+  let Constraints = "";
+  bits<12> op0;
+  bits<11> op1;
+  bits<3> op2;
+  bits<1> coissue;
+  let Inst{31} = 0b0;
+  let Inst{30-28} = 0b111;
+  let Inst{27} = 0b0;
+  let Inst{26-21} = op0{5-0};
+  let Inst{20} = 0b0;
+  let Inst{19-14} = op0{11-6};
+  let Inst{13-3} = op1;
+  let Inst{2-0} = op2;
+  let TSFlags{22} = 0; // Lane number.
+  let TSFlags{24} = 1; // System instruction.
+  let TSFlags{25} = 0; // Can coissue.
+}
+class inst_sendpic_mmmn_zi_zi_zi : EncodedSupervisorI, Sched<[WriteMain]> {
+  // Format: sendpic zimm6, zimm2, zimm18
+  let AsmString = "sendpic $op0, $op1, $op2";
+  dag OutOperandList = (outs );
+  dag InOperandList = (ins imm6zi:$op0, imm2zi:$op1, imm18zi:$op2, CoissueFlag:$coissue);
+  let Constraints = "";
+  bits<6> op0;
+  bits<2> op1;
+  bits<18> op2;
+  bits<1> coissue;
+  let Inst{31} = 0b0;
+  let Inst{30-28} = 0b111;
+  let Inst{27} = 0b0;
+  let Inst{26-21} = op0;
+  let Inst{20} = 0b1;
+  let Inst{19-18} = op1;
+  let Inst{17-0} = op2;
+  let TSFlags{22} = 0; // Lane number.
+  let TSFlags{24} = 1; // System instruction.
+  let TSFlags{25} = 0; // Can coissue.
+}
+class inst_sendpicp_mmmn_zi_bf_zi_zi : EncodedSupervisorI, Sched<[WriteMain]> {
+  // Format: sendpicp zimm6, bf18, zimm3, zimm1
+  let AsmString = "sendpicp $op0, $op1, $op2, $op3";
+  dag OutOperandList = (outs );
+  dag InOperandList = (ins imm6zi:$op0, imm18zi:$op1, imm3zi:$op2, imm1zi:$op3, CoissueFlag:$coissue);
+  let Constraints = "";
+  bits<6> op0;
+  bits<18> op1;
+  bits<3> op2;
+  bits<1> op3;
+  bits<1> coissue;
+  let Inst{31-28} = 0b1111;
+  let Inst{27} = op3;
   let Inst{26-21} = op0;
   let Inst{20-3} = op1;
   let Inst{2-0} = op2;

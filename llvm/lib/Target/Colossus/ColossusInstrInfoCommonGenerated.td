@@ -9,6 +9,7 @@
 // Operand classes.
 
 def imm11si : ImmSIOperand<11, ImmAsmOperand<"11si">>;
+def imm11zi : ImmSIOperand<11, ImmAsmOperand<"11zi">>;
 def imm12iz : ImmIZOperand<12, ImmAsmOperand<"12iz">>;
 def imm12zi : ImmZIOperand<12, ImmAsmOperand<"12zi">>;
 def imm13zi : ImmZIOperand<13, ImmAsmOperand<"13zi">>;
@@ -19,6 +20,7 @@ def imm19zi : ImmZIOperand<19, ImmAsmOperand<"19zi">>;
 def imm1zi : ImmZIOperand<1, ImmAsmOperand<"1zi">>;
 def imm2zi : ImmZIOperand<2, ImmAsmOperand<"2zi">>;
 def imm3zi : ImmZIOperand<3, ImmAsmOperand<"3zi">>;
+def imm3si : ImmZIOperand<3, ImmAsmOperand<"3si">>;
 def imm4zi : ImmZIOperand<4, ImmAsmOperand<"4zi">>;
 def imm6zi : ImmZIOperand<6, ImmAsmOperand<"6zi">>;
 def imm7zi : ImmZIOperand<7, ImmAsmOperand<"7zi">>;
